@@ -1,0 +1,9 @@
+#!/bin/bash
+
+MAIN_DIRECTORY="$HOME/.goweather"
+EXECUTABLE_PATH=$MAIN_DIRECTORY/bin
+
+echo $EXECUTABLE_PATH
+export PATH=$EXECUTABLE_PATH:$PATH
+
+echo $PATH
