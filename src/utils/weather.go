@@ -2,7 +2,6 @@ package utils
 
 import (
 	"encoding/json"
-	// "fmt"
 	t "go-weather/src/types"
 	"io"
 	"log"
@@ -19,18 +18,12 @@ type GetWeatherParams struct {
 
 func GetWeatherInfo(params GetWeatherParams) t.WeatherInfo {
   var q string = params.IPAddress
-  // var location t.LocationInfo = params.Location
   var queryString string 
   var result t.WeatherInfo
   
-  // if location.Lat != 0 && location.Lon != 0 {
-  //   q = fmt.Sprintf("%f", location.Lat) + " " + fmt.Sprintf("%f", location.Lon)
-  // }
-
   queryString = "?q=" + q + "&key=" + params.APIKey + "&lang=" + params.Lang
   
   var url string = WEATHER_URL + queryString
-  // fmt.Printf("", url)
   res, err := http.Get(url)
 
   if err != nil {
@@ -43,7 +36,7 @@ func GetWeatherInfo(params GetWeatherParams) t.WeatherInfo {
   }
 
   json.Unmarshal(bytebody, &result)
+  CreateLastInfoFile(result)
   return result
 }
-
 
