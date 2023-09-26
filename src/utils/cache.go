@@ -20,7 +20,11 @@ func CreateLastInfoFile(weather t.WeatherInfo) {
     log.Fatal(err)
   }
   var filepath string = GenerateTempFilePath()
-  os.WriteFile(filepath, bin, 0777)
+  err = os.WriteFile(filepath, bin, 0777)
+
+  if err != nil {
+    log.Fatal(err)
+  }
 }
 
 func GetCachedWeatherInfo() t.WeatherInfo {
@@ -31,7 +35,10 @@ func GetCachedWeatherInfo() t.WeatherInfo {
     return t.WeatherInfo{}
   }
   
-  json.Unmarshal(bin, &weather)
+  err = json.Unmarshal(bin, &weather)
+  if err != nil {
+    return t.WeatherInfo{}
+  }
 
   return weather
 }

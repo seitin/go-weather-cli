@@ -10,7 +10,6 @@ import (
 	"os"
 	"strings"
 	"time"
-
 	externalip "github.com/glendc/go-external-ip"
 )
 
@@ -23,12 +22,19 @@ type GoWeatherSettings struct {
 func ReadSettings() GoWeatherSettings {
   var settings GoWeatherSettings
   userHomeDir, err := os.UserHomeDir()
+  if err != nil {
+    log.Fatal(err)
+  }
   bytearray, err := os.ReadFile(userHomeDir + "/.goweather/conf.json")
   if err != nil {
     log.Fatal(err)
   }
 
-  json.Unmarshal(bytearray, &settings)
+  err = json.Unmarshal(bytearray, &settings)
+  if err != nil {
+    log.Print("Couldn't find the configuration file that should be located in $HOME/.goweather/conf.json")
+    log.Fatal(err)
+  }
   return settings
 }
 

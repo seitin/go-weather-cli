@@ -35,7 +35,10 @@ func GetWeatherInfo(params GetWeatherParams) t.WeatherInfo {
     log.Fatal(err)
   }
 
-  json.Unmarshal(bytebody, &result)
+  err = json.Unmarshal(bytebody, &result)
+  if err != nil {
+    log.Fatal(err)
+  }
   CreateLastInfoFile(result)
   return result
 }
