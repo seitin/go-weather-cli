@@ -23,7 +23,7 @@ type WeatherInfo struct {
 	} `json:"location"`
 	Current struct {
 		LastUpdatedEpoch int64     `json:"last_updated_epoch"`
-		LastUpdated      int64  `json:"last_updated"`
+		LastUpdated      string  `json:"last_updated"`
     TempF            float32 `json:"temp_f"`
 		TempC            float32 `json:"temp_c"`
 		IsDay            int     `json:"is_day"`
